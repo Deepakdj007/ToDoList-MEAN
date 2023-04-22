@@ -1,0 +1,120 @@
+.spacer{
+  flex: 1 1 auto;
+}
+.top-toolbar-row{
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.158);
+  padding-left: 0;
+  height: 55px;
+  z-index: 999;
+}
+
+mat-icon-button ::ng-deep .mat-mdc-icon-button svg, .mat-mdc-icon-button img{
+  height: 40px;
+  width: 40px;
+}
+.user-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-toolbar-row{
+  height: 50px;
+}
+.new-list-button{
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-radius: 0%;
+  justify-self: flex-start;
+}
+.home-buttons{
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0%;
+  border-left: none;
+}
+.home-button-2{
+  border-left: none;
+}
+.home-button-3{
+  border-right: none;
+}
+
+.profile-icon{
+  transition: all 0.15s;
+
+  &:hover{
+    transform:scale(1.5) !important;
+  }
+}
+.profile-pic{
+  border: 2px solid #c22366;
+  width: 65px;
+  height: 65px;
+  border-radius: 1000px;
+}
+.profile-dropdown-menu{
+  width: 180px;
+}
+.role{
+  width:45px;
+  height: 18px;
+  font-size: 8px;
+  border-radius: 1000px;
+  padding: 5px;
+  color: white;
+}
+.info{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .name{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(58, 58, 58);
+    margin-bottom: 0px;
+    height: 10px;
+    margin-bottom: 7px;
+  }
+  .email{
+    height: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgb(83, 83, 83);
+  }
+}
+.edit-icon{
+  font-size: 19px;
+}
+.edit-button{
+  background-color: #f0f0f0;
+  border-radius: 10000px;
+  padding: 10px;
+  height: 38px;
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.edit-profile{
+  margin: 10px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginLogout{
+  margin: 15px 0 15px 0;
+}
+.loginLogoutButton{
+  width: 100px;
+}
+
+.button-active{
+  background-color: #c22366;
+  color: white;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.404);
+  height: 100%;
+  transform: translateX(-2px);
+}

@@ -1,0 +1,40 @@
+
+<mat-toolbar color="basic">
+  <mat-toolbar-row class="top-toolbar-row">
+    <button class="global-button-outline new-list-button">New List +</button>
+    <span class="spacer"></span>
+    <button mat-icon-button class="user-icon" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="menu" >
+      <img src="../../../../assets/male-user.png" alt="" height="100px">
+    </button>
+
+    <mat-menu #menu="matMenu" class="user-profile-menu d-flex flex-column justify-content-center align-items-center">
+      <div class="profile-dropdown-menu d-flex flex-column justify-content-center align-items-center">
+        <div class="profile-pic d-flex justify-content-center align-items-center mx-3 mt-3 mb-2">
+          <img src="../../../../assets/male-user.png" alt="" height="60px">
+        </div>
+        <div class="role align-center d-flex justify-content-center align-items-center global-background-color">
+            <p class="m-0">Role</p>
+        </div>
+        <div class="info">
+          <p class="name">Name</p>
+          <p class="email">email@email.com</p>
+        </div>
+        <div class="loginLogout">
+          <button class="global-button-fill loginLogoutButton" routerLink="/login">Login</button>
+        </div>
+        <div class="edit-profile">
+          <button mat-icon-button class="edit-button" aria-label="Example icon-button with menu icon">
+            <mat-icon class="global-color edit-icon">edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-menu>
+
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class=" bottom-toolbar-row d-flex justify-content-center">
+    <button class="global-button-outline home-buttons home-button-1" routerLink="/todays-tasks" routerLinkActive="button-active">Todays</button>
+    <button class="global-button-outline home-buttons home-button-2" routerLink="/scheduled-tasks" routerLinkActive="button-active">Scheduled</button>
+    <button class="global-button-outline home-buttons home-button-3" routerLink="" routerLinkActive="button-active" [routerLinkActiveOptions]="{exact: true}">List</button>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.global-button-outline{
+  border: 1px solid #c22366;
+  padding: 2px 15px;
+  border-radius: 8px;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #dc3d80;
+  transition: all 0.15s;
+  transition: height 0s  background-color 0.15s color 0.15s box-shadow 0.15s;
+  height: 65%;
+
+  &:hover{
+    background-color: #c22366;
+    color: white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.404);
+    height: 100%;
+    transform: translateX(-2px);
+  }
+  &:active{
+    background-color: #c223657a;
+    border-color:#c223657a;
+    box-shadow: none;
+  }
+}
+.global-button-fill{
+  border: 2px solid #c22366;
+  background-color: #c22366;
+  padding: 2px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  transition: all 0.15s;
+
+  &:hover{
+    background-color: transparent;
+    color: #dc3d80;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.404);
+  }
+  &:active{
+    background-color: #ffffff7a;
+    box-shadow: none;
+    color: #dc3d80;
+
+  }
+}
+.global-background-color{
+  background-color: #c22366;
+}
+.global-color{
+color: #c22366;
+}
+
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

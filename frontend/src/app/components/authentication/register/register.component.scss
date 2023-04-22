@@ -1,0 +1,121 @@
+.container-fluid{
+  height: calc(100vh - 105px);
+
+  background: #642B73;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #C6426E, #642B73);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #C6426E, #642B73); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  overflow-y: auto;
+
+}
+.container {
+  position: relative;
+  width: 400px;
+  margin: auto;
+  padding: 36px 48px 48px 48px;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+  background-color: rgba(240, 240, 240, 0.849);
+}
+.container-top{
+  background-color: rgba(240, 240, 240, 0.849);
+  border-radius: 11px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.226);
+}
+.login{
+  background-color: #d8d8d8;
+  margin: 0;
+  padding: 0;
+  border-top-right-radius: 11px;
+  border-top-left-radius: 11px;
+
+  .login-title {
+    padding: 15px;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 16px;
+}
+.form-field{
+  width: 100% !important;
+}
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input{
+  width: 100%;
+  padding: 10px;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 9px;
+  transition: all 0.15s;
+
+  &:hover{
+    box-shadow: 0 0 0 4px #ff006a23;
+  }
+  &:active{
+    box-shadow: 0 0 0 4px #ff006a23;
+  }
+}
+.input-field{
+  width: 100%;
+  border: none;
+}
+
+.input-field:focus {
+  outline: none;
+}
+.global-button-fill{
+  margin-top: 3px;
+  height: 50px;
+  font-size: large;
+  border-radius: 9px;
+
+  &:hover{
+    background-color: rgb(248, 248, 248);
+  }
+}
+.register-link{
+  cursor: pointer;
+  color: #c22366 !important;
+  transition: all 0.15s;
+
+  &:hover{
+    color: #990e48 !important;  }
+}
+@media only screen and (max-width: 500px){
+  .container {
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 400px){
+  .container {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 300px){
+  .container {
+    width: 250px;
+  }
+}
+@media only screen and (max-height: 800px){
+  .container {
+    height: calc(80vh - 105px);
+    overflow-y: auto;
+  }
+}
+
+

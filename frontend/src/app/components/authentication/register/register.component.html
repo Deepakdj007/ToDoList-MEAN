@@ -1,0 +1,46 @@
+<div class="container-fluid d-flex justify-content-center align-items-center">
+  <div class="container-top">
+    <div class="login">
+      <h1 class="login-title">Login</h1>
+    </div>
+    <div class="container">
+      <form class="login-form">
+
+        <div class="form-field">
+          <label for="name">Name </label>
+          <div class="input d-flex flex-row">
+            <input id="name" type="text" class="input-field" placeholder="Name" name="name" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email </label>
+          <div class="input d-flex flex-row">
+            <input id="email" type="email" class="input-field" placeholder="me@example.com" name="email" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password </label>
+          <div class="input d-flex flex-row">
+            <input type="{{ showPassword ? 'text' : 'password' }}" class="input-field" id="password" name="password" placeholder="password">
+            <i (click)="togglePasswordVisibility()" class="{{ showPassword ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Confirm Password </label>
+          <div class="input d-flex flex-row">
+            <input type="{{ showPassword ? 'text' : 'password' }}" class="input-field" id="password" name="password" placeholder="password">
+            <i (click)="togglePasswordVisibility()" class="{{ showPassword ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
+          </div>
+        </div>
+
+        <button class="global-button-fill" type="submit" value="Log in">
+          Log in
+        </button>
+        <p class="text-center">Already a user?<a routerLink='/login' class="register-link"> login now</a></p>
+      </form>
+    </div>
+</div>
+</div>
