@@ -50,24 +50,26 @@
 .login-form label {
   display: block;
   margin-bottom: 8px;
+  font-size: 13px;
 }
 
 .input{
   width: 100%;
   padding: 10px;
-  height: 50px;
+  height: 40px;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 9px;
   transition: all 0.15s;
+  font-size: 13px;
 
   &:hover{
-    box-shadow: 0 0 0 4px #ff006a23;
+    box-shadow: 0 0 0 3px #ff006a23;
   }
   &:active{
-    box-shadow: 0 0 0 4px #ff006a23;
+    box-shadow: 0 0 0 3px #ff006a23;
   }
 }
 .input-field{
@@ -80,8 +82,8 @@
 }
 .global-button-fill{
   margin-top: 3px;
-  height: 50px;
-  font-size: large;
+  height: 40px;
+  font-size: 15px;
   border-radius: 9px;
 
   &:hover{
@@ -96,6 +98,32 @@
   &:hover{
     color: #990e48 !important;  }
 }
+
+.errors{
+  color: red;
+  font-weight: 500px;
+  font-size: 10px;
+  margin-top: 2px;
+  margin-left: 5px;
+  height: 10px;
+}
+.error-style{
+  box-shadow: 0 0 0 3px #ff00005e;
+  border: 1px solid rgba(255, 0, 0, 0.623);;
+}
+
+.password-errors-container{
+  position: relative;
+  color: red;
+  width: 100%;
+  font-weight: 500px;
+  font-size: 10px;
+  margin-top: 3px;
+  margin-left: 5px;
+  min-height: 10px;
+  z-index: 100000;
+}
+
 @media only screen and (max-width: 500px){
   .container {
     width: 350px;

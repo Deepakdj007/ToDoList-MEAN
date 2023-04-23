@@ -4,18 +4,37 @@
       <h1 class="login-title">Login</h1>
     </div>
     <div class="container">
-      <form class="login-form">
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-field">
           <label for="email">Email </label>
-          <div class="input d-flex flex-row">
-            <input id="email" type="email" class="input-field" placeholder="me@example.com" name="email" />
+          <div class="input d-flex flex-row" [ngClass]="{'error-style':(submitted || loginForm.controls['email'].touched) && loginForm.controls['email'].invalid}">
+            <input formControlName="email" id="email" type="email" class="input-field" placeholder="me@example.com" name="email" />
+          </div>
+          <div class="errors">
+            <div *ngIf="(submitted || loginForm.controls['email'].touched) && loginForm.controls['email'].invalid">
+              <div *ngIf="loginForm.controls['email'].errors!['required']">* Email is required</div>
+              <div *ngIf="loginForm.controls['email'].errors!['email']">* Please enter a valid email</div>
+            </div>
           </div>
         </div>
         <div class="form-field">
           <label for="password">Password </label>
-          <div class="input d-flex flex-row">
-            <input type="{{ showPassword ? 'text' : 'password' }}" class="input-field" id="password" name="password" placeholder="password">
+          <div class="input d-flex flex-row" [ngClass]="{'error-style':(submitted || loginForm.controls['password'].touched) && loginForm.controls['password'].invalid}">
+            <input formControlName="password" type="{{ showPassword ? 'text' : 'password' }}" class="input-field" id="password" name="password" placeholder="password">
             <i (click)="togglePasswordVisibility()" class="{{ showPassword ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
+          </div>
+          <div class="password-errors-container">
+            <div *ngIf="(submitted || loginForm.controls['password'].touched) && loginForm.controls['password'].invalid">
+              <div class="password-errors d-inline">
+                  <span  *ngIf="loginForm.controls['password'].errors!['required']">* Password is required. </span>
+                  <span  *ngIf="loginForm.controls['password'].errors!['minlength']">
+                    * Password must be at least {{ loginForm.controls['password'].errors!['minlength'].requiredLength }} characters long.
+                  </span>
+                  <span *ngIf="loginForm.controls['password'].errors!['pattern']">
+                     * Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.
+                  </span>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -95,6 +95,30 @@
   &:hover{
     color: #990e48 !important;  }
 }
+.errors{
+  color: red;
+  font-weight: 500px;
+  font-size: 10px;
+  margin-top: 2px;
+  margin-left: 5px;
+  height: 10px;
+}
+.error-style{
+  box-shadow: 0 0 0 3px #ff00005e;
+  border: 1px solid rgba(255, 0, 0, 0.623);;
+}
+
+.password-errors-container{
+  position: relative;
+  color: red;
+  width: 100%;
+  font-weight: 500px;
+  font-size: 10px;
+  margin-top: 3px;
+  margin-left: 5px;
+  min-height: 10px;
+  z-index: 100000;
+}
 @media only screen and (max-width: 500px){
   .container {
     width: 350px;

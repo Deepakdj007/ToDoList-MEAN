@@ -65,7 +65,6 @@ mat-icon-button ::ng-deep .mat-mdc-icon-button svg, .mat-mdc-icon-button img{
   color: white;
 }
 .info{
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,9 +105,26 @@ mat-icon-button ::ng-deep .mat-mdc-icon-button svg, .mat-mdc-icon-button img{
 }
 .loginLogout{
   margin: 15px 0 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .register-link{
+    font-size: 10px;
+    margin: 2px 0 0 0;
+  }
+  a{
+    cursor: pointer;
+    color: #c22366 !important;
+    transition: all 0.15s;
+
+    &:hover{
+      color: #990e48 !important;  }
+  }
 }
 .loginLogoutButton{
-  width: 100px;
+  width: 115px;
 }
 
 .button-active{
