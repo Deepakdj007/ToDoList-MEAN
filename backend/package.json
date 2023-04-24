@@ -29,10 +29,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^18.16.0",
     "typescript": "^5.0.4"
-  }
+  },
+  "description": ""
 }

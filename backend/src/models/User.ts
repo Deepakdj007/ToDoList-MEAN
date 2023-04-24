@@ -2,6 +2,15 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+
+interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  createJWT(): string;
+  comparePassword():string;
+}
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -31,7 +40,7 @@ UserSchema.pre('save', async function () {
 })
 
 UserSchema.methods.createJWT = function () {
-    const secretKey:string = process.env.JWT_SECRET!;
+    const secretKey = process.env.JWT_SECRET as string;
 
     return jwt.sign(
         { userId: this._id, name: this.name },
@@ -47,5 +56,5 @@ UserSchema.methods.comparePassword = async function (candidatePassword:string){
     return isMatch;
 }
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model<IUser>("User", UserSchema);
 export default User;
