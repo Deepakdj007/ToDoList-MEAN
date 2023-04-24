@@ -7,8 +7,6 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const conectDB = (url) => {
     return mongoose_1.default.connect(url, {
         useNewUrlParser: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
         useUnifiedTopology: true,
     });
 };

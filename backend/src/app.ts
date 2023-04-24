@@ -1,5 +1,5 @@
 import express, {Application, Request, Response} from 'express';
-
+import 'express-async-errors';
 import * as dotenv from "dotenv";
 dotenv.config({ path: __dirname+'/.env' });
 
@@ -9,7 +9,7 @@ const xss = require('xss-clean');
 import rateLimiter  from 'express-rate-limit';
 
 const app:Application = express();
-const port:string|number = process.env.PORT || 3000;
+const port:number = 3000;
 
 
 import connectDB from './db/connect';
@@ -27,6 +27,7 @@ app.use(
     max: 100, // limit each IP to 100 requests per windowMs
   })
 );
+app.use(express.json());
 // Use helmet to set various HTTP headers for security
 app.use(helmet());
 
@@ -36,6 +37,9 @@ app.use(cors());
 // Use xssClean to sanitize user input
 app.use(xss());
 
+app.get('/', (req, res) => {
+  res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
+});
 
 //routes
 
@@ -43,6 +47,8 @@ app.use('/api/v1/auth', authRouter);
 
 app.use(notFound);
 app.use(errorHandlerMiddleware);
+
+
 
 const start = async () => {
   try{

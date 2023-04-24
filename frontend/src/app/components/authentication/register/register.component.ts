@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validator';
 import { RegisterService } from 'src/app/services/register.service';
+import { Subscribable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   showPassword = false;
   showConfirmPassword = false;
   registerForm!: FormGroup;
   submitted: boolean = false;
+  registerSubscription!:Subscription;
 
   constructor(private fb: FormBuilder, private registerService:RegisterService) {}
 
@@ -50,8 +52,20 @@ export class RegisterComponent implements OnInit {
       return
     }
     else{
-      const {name, email, password} = this.registerForm.value
-      this.registerService.createUser({name:name, email:email, password:password})
+      const {name, email, password} = this.registerForm.value;
+      this.registerSubscription = this.registerService.createUser({name:name, email:email, password:password})
+      .subscribe((res)=>{
+        console.log(res)
+      },
+      (err)=>{
+      console.log(err)
     }
+      )
+
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.registerSubscription.unsubscribe()
   }
 }

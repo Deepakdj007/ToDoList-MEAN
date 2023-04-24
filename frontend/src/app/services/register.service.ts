@@ -11,6 +11,6 @@ export class RegisterService {
 
   createUser(user: User) {
     console.log(user)
-    //return this.http.post('http://localhost:8080/api/v1/auth/register', user);
+    return this.http.post('http://localhost:3000/api/v1/auth/register', user);
   }
 }
