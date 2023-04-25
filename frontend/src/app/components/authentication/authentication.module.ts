@@ -5,6 +5,9 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SharedModules } from 'src/app/shared/shared.modules';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -13,7 +16,8 @@ import { SharedModules } from 'src/app/shared/shared.modules';
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
-    SharedModules
+    SharedModules,
+    MatSnackBarModule
   ],
   exports: [
     LoginComponent,

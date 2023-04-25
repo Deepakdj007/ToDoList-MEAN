@@ -1,8 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit ,Renderer2} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validator';
 import { RegisterService } from 'src/app/services/register.service';
 import { Subscribable, Subscription } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,8 +17,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
   submitted: boolean = false;
   registerSubscription!:Subscription;
+  durationInSeconds = 5;
 
-  constructor(private fb: FormBuilder, private registerService:RegisterService) {}
+
+  constructor(private _snackBar: MatSnackBar, private fb: FormBuilder, private registerService:RegisterService,private renderer: Renderer2) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -46,6 +51,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
   }
 
+  openSnackBar(registerMessage:string, registrationStatus:string, src:string) {
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      // duration: this.durationInSeconds * 1000,
+      duration: 50000 * 1000,
+      horizontalPosition: "center",
+      verticalPosition: "top",
+      data: { message: registerMessage, status:registrationStatus, src:src}
+    });
+  }
+
   onSubmit(){
     this.submitted = true;
     if(this.registerForm.invalid){
@@ -54,10 +69,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     else{
       const {name, email, password} = this.registerForm.value;
       this.registerSubscription = this.registerService.createUser({name:name, email:email, password:password})
-      .subscribe((res)=>{
+      .subscribe((res:any)=>{
+        this.openSnackBar(`welcome ${res.user.name}`,"success", '../../../../assets/success.png');
         console.log(res)
       },
       (err)=>{
+      this.openSnackBar(err.error.msg,"failed",'../../../../assets/failed.png')
       console.log(err)
     }
       )
@@ -66,6 +83,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.registerSubscription.unsubscribe()
+    if (this.registerSubscription) {
+      this.registerSubscription.unsubscribe();
+    }
   }
 }

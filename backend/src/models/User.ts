@@ -8,7 +8,7 @@ interface IUser extends Document {
   email: string;
   password: string;
   createJWT(): string;
-  comparePassword():string;
+  comparePassword(password:string):Promise<boolean>;
 }
 
 const UserSchema = new mongoose.Schema({
@@ -51,7 +51,7 @@ UserSchema.methods.createJWT = function () {
       )
 }
 
-UserSchema.methods.comparePassword = async function (candidatePassword:string){
+UserSchema.methods.comparePassword = async function (candidatePassword:string):Promise<boolean>{
     const isMatch = await bcrypt.compare(candidatePassword,this.password);
     return isMatch;
 }

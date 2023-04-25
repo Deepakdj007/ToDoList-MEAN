@@ -61,6 +61,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 color: #c22366;
 }
 
+// ::ng-deep .success-snackbar {
+// --mdc-snackbar-container-color: green !important;
+// .mat-mdc-snack-bar-container .mdc-snackbar__surface{
+//   background-color: green !important;
 
+// }
+//   color: white;
+// }
+// ::ng-deep .error-snackbar {
+//   background-color: red !important;
+//   color: white;
+// }
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
