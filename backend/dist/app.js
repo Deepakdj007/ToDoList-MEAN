@@ -36,6 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+require("express-async-errors");
 const dotenv = __importStar(require("dotenv"));
 dotenv.config({ path: __dirname + '/.env' });
 const helmet_1 = __importDefault(require("helmet"));
@@ -43,7 +44,7 @@ const cors_1 = __importDefault(require("cors"));
 const xss = require('xss-clean');
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
+const port = 3000;
 const connect_1 = __importDefault(require("./db/connect"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const not_found_1 = __importDefault(require("./middleware/not-found"));
@@ -53,12 +54,16 @@ app.use((0, express_rate_limit_1.default)({
     windowMs: 15 * 60 * 1000,
     max: 100, // limit each IP to 100 requests per windowMs
 }));
+app.use(express_1.default.json());
 // Use helmet to set various HTTP headers for security
 app.use((0, helmet_1.default)());
 // Use cors to enable Cross-Origin Resource Sharing
 app.use((0, cors_1.default)());
 // Use xssClean to sanitize user input
 app.use(xss());
+app.get('/', (req, res) => {
+    res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
+});
 //routes
 app.use('/api/v1/auth', auth_1.default);
 app.use(not_found_1.default);
