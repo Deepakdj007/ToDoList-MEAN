@@ -1,11 +1,9 @@
 .snack-bar-message{
     width: 100%;
-    min-height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 10px 10px 10px;
     border-radius: 8px;
     .example-pizza-party{
         p{
@@ -39,7 +37,7 @@
 //     align-items: center;
 //     background-color: rgb(255, 79, 79);
 //     padding: 10px 5px 10px 5px;
-//     border-radius: 8px;  
+//     border-radius: 8px;
 // }
 // ::ng-deep .mdc-snackbar__label{
 //     padding: 0!important;

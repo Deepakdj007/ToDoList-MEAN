@@ -18,18 +18,21 @@ const register = async (req:Request, res:Response)=>{
 
 const login = async (req:Request, res:Response)=>{
     const {email, password} = req.body;
+    console.log("password:", password); // Add this line
 
     if(!email || !password){
         throw new BadRequestError('PLease provide email and password')
     }
     const user = await User.findOne({email})
+    console.log("user:", user); // Add this line
     if(!user){
         throw new UnauthenticatedError('User not found')
     }
     const isPasswordCorrect = await user.comparePassword(password)
+    console.log("isPasswordCorrect: ",+isPasswordCorrect)
     if (!isPasswordCorrect) {
-      throw new UnauthenticatedError('Inavalid password')
-    }    
+      throw new UnauthenticatedError('Wrong password')
+    }
     const token = user.createJWT()
     res.status(StatusCodes.OK).json({user:{name:user.name}, token})
 }

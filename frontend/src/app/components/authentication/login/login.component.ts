@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
 import { RegisterService } from 'src/app/services/register.service';
 import { Subscription } from 'rxjs';
-
+import { LoginResponse } from 'src/app/models/LoginResponse';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   registerSubscription!:Subscription;
   durationInSeconds: number = 5;
+  loginResponse!:LoginResponse;
 
   constructor(private fb: FormBuilder,private _snackBar: MatSnackBar,private registerService:RegisterService) {}
 
@@ -32,8 +33,7 @@ export class LoginComponent implements OnInit {
   }
   openSnackBar(registerMessage:string, registrationStatus:string, src:string) {
     this._snackBar.openFromComponent(SnackBarComponent, {
-      // duration: this.durationInSeconds * 1000,
-      duration: 50000 * 1000,
+      duration: this.durationInSeconds * 1000,
       horizontalPosition: "center",
       verticalPosition: "top",
       data: { message: registerMessage, status:registrationStatus, src:src}
@@ -49,7 +49,8 @@ export class LoginComponent implements OnInit {
       const {email, password} = this.loginForm.value;
       this.registerSubscription = this.registerService.loginUser({email:email, password:password})
       .subscribe((res:any)=>{
-        this.openSnackBar(`welcome ${res.user.name}`,"success", '../../../../assets/success.png');
+        this.openSnackBar(`Welcome ${res.user.name}`,"success", '../../../../assets/success.png');
+        this.loginResponse = res;
         console.log(res)
       },
       (err)=>{

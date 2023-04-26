@@ -16,21 +16,33 @@ const User_1 = __importDefault(require("../models/User"));
 const http_status_codes_1 = require("http-status-codes");
 const bad_request_1 = require("../errors/bad-request");
 const unauthenticated_1 = require("../errors/unauthenticated");
+const already_exist_1 = require("../errors/already-exist");
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield User_1.default.create(Object.assign({}, req.body));
-    const token = user.createJWT();
-    res.status(http_status_codes_1.StatusCodes.CREATED).json({ user: { name: user.name }, token });
+    try {
+        const user = yield User_1.default.create(Object.assign({}, req.body));
+        const token = user.createJWT();
+        res.status(http_status_codes_1.StatusCodes.CREATED).json({ user: { name: user.name }, token });
+    }
+    catch (err) {
+        throw new already_exist_1.AlreadyExistError('User already exist !');
+    }
 });
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
+    console.log("password:", password); // Add this line
     if (!email || !password) {
         throw new bad_request_1.BadRequestError('PLease provide email and password');
     }
     const user = yield User_1.default.findOne({ email });
+    console.log("user:", user); // Add this line
     if (!user) {
-        throw new unauthenticated_1.UnauthenticatedError('Invalid credentials');
+        throw new unauthenticated_1.UnauthenticatedError('User not found');
     }
-    //compare password
+    const isPasswordCorrect = yield user.comparePassword(password);
+    console.log("isPasswordCorrect: ", +isPasswordCorrect);
+    if (!isPasswordCorrect) {
+        throw new unauthenticated_1.UnauthenticatedError('Wrong password');
+    }
     const token = user.createJWT();
     res.status(http_status_codes_1.StatusCodes.OK).json({ user: { name: user.name }, token });
 });

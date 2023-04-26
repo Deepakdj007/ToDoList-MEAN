@@ -33,8 +33,8 @@ const UserSchema = new mongoose_1.default.Schema({
     password: {
         type: String,
         required: [true, "Please provide password"],
-        minlength: [6, "Password must be at least 6 characters long"],
-        select: false
+        select: false,
+        minlength: [6, "Password must be at least 6 characters long"]
     },
 });
 UserSchema.pre('save', function () {
@@ -51,8 +51,15 @@ UserSchema.methods.createJWT = function () {
 };
 UserSchema.methods.comparePassword = function (candidatePassword) {
     return __awaiter(this, void 0, void 0, function* () {
-        const isMatch = yield bcryptjs_1.default.compare(candidatePassword, this.password);
-        return isMatch;
+        yield User.findOne({ email: this.email }).select('password').exec().then((result) => __awaiter(this, void 0, void 0, function* () {
+            console.log(result);
+            const isMatch = yield bcryptjs_1.default.compare(candidatePassword, result.password);
+            console.log("isMatch: " + isMatch);
+            return { isMatch: isMatch };
+        }));
+        // console.log("candidatePassword:", candidatePassword); // Add this line  
+        // const isMatch = await bcrypt.compare(candidatePassword,this.password);
+        //   return isMatch;
     });
 };
 const User = mongoose_1.default.model("User", UserSchema);

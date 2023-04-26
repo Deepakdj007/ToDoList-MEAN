@@ -8,7 +8,7 @@ interface IUser extends Document {
   email: string;
   password: string;
   createJWT(): string;
-  comparePassword(password:string):Promise<boolean>;
+  comparePassword(password:any):any;
 }
 
 const UserSchema = new mongoose.Schema({
@@ -29,8 +29,8 @@ const UserSchema = new mongoose.Schema({
   password:{
     type:String,
     required: [true, "Please provide password"],
-    minlength: [6, "Password must be at least 6 characters long"],
-    select:false
+    select:false,
+    minlength: [6, "Password must be at least 6 characters long"]
   },
 });
 
@@ -51,9 +51,17 @@ UserSchema.methods.createJWT = function () {
       )
 }
 
-UserSchema.methods.comparePassword = async function (candidatePassword:string):Promise<boolean>{
-    const isMatch = await bcrypt.compare(candidatePassword,this.password);
-    return isMatch;
+UserSchema.methods.comparePassword = async function (candidatePassword:any){
+  let returneduser:any;
+   await User.findOne({email: this.email}).select('password').exec().then(async (result:any)=>{
+    returneduser = result
+  })
+  const isMatch = await bcrypt.compare(candidatePassword,returneduser?.password);
+  console.log("isMatch: " + isMatch)
+  return isMatch
+  // console.log("candidatePassword:", candidatePassword); // Add this line  
+  // const isMatch = await bcrypt.compare(candidatePassword,this.password);
+  //   return isMatch;
 }
 
 const User = mongoose.model<IUser>("User", UserSchema);
