@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
-import { RegisterService } from 'src/app/services/register.service';
 import { Subscription } from 'rxjs';
 import { LoginResponse } from 'src/app/models/LoginResponse';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,10 +17,15 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted: boolean = false;
   registerSubscription!:Subscription;
-  durationInSeconds: number = 5;
+  durationInSeconds: number = 2;
   loginResponse!:LoginResponse;
 
-  constructor(private fb: FormBuilder,private _snackBar: MatSnackBar,private registerService:RegisterService) {}
+  constructor(
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private userService:UserService,
+    private router:Router
+    ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -32,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
   openSnackBar(registerMessage:string, registrationStatus:string, src:string) {
-    this._snackBar.openFromComponent(SnackBarComponent, {
+    this.snackBar.openFromComponent(SnackBarComponent, {
       duration: this.durationInSeconds * 1000,
       horizontalPosition: "center",
       verticalPosition: "top",
@@ -47,11 +53,13 @@ export class LoginComponent implements OnInit {
     }
     else{
       const {email, password} = this.loginForm.value;
-      this.registerSubscription = this.registerService.loginUser({email:email, password:password})
+      this.registerSubscription = this.userService.loginUser({email:email, password:password})
       .subscribe((res:any)=>{
         this.openSnackBar(`Welcome ${res.user.name}`,"success", '../../../../assets/success.png');
         this.loginResponse = res;
         console.log(res)
+        this.userService.setUser(res.user);
+        this.router.navigate(['/todays-tasks']);
       },
       (err)=>{
       this.openSnackBar(err.error.msg,"failed",'../../../../assets/failed.png')

@@ -51,12 +51,13 @@ UserSchema.methods.createJWT = function () {
 };
 UserSchema.methods.comparePassword = function (candidatePassword) {
     return __awaiter(this, void 0, void 0, function* () {
+        let returneduser;
         yield User.findOne({ email: this.email }).select('password').exec().then((result) => __awaiter(this, void 0, void 0, function* () {
-            console.log(result);
-            const isMatch = yield bcryptjs_1.default.compare(candidatePassword, result.password);
-            console.log("isMatch: " + isMatch);
-            return { isMatch: isMatch };
+            returneduser = result;
         }));
+        const isMatch = yield bcryptjs_1.default.compare(candidatePassword, returneduser === null || returneduser === void 0 ? void 0 : returneduser.password);
+        console.log("isMatch: " + isMatch);
+        return isMatch;
         // console.log("candidatePassword:", candidatePassword); // Add this line  
         // const isMatch = await bcrypt.compare(candidatePassword,this.password);
         //   return isMatch;

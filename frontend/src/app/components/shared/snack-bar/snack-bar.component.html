@@ -1,8 +1,9 @@
 <div class="snack-bar-message">
-    <span class="example-pizza-party" matSnackBarLabel>
-        <p>{{message}}</p>
-      </span>
-      <span>
-        <img [src]="src" alt="" height="30px" width="30px">
-      </span>
+  <span class="message" matSnackBarLabel>
+    <p>{{ message }}</p>
+  </span>
+  <span>
+    <img [src]="src" alt="" height="30px" width="30px" />
+  </span>
+  <p class="close" (click)="close()">x</p>
 </div>

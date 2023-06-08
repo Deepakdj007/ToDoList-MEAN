@@ -18,4 +18,7 @@ export class SnackBarComponent {
     this.src = data.src;
     this.status = data.status;
   }
+  close(){
+    this.snackBarRef.dismiss();
+  }
 }

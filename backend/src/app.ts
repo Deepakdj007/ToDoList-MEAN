@@ -15,8 +15,7 @@ const port:number = 3000;
 import connectDB from './db/connect';
 import auth from './middleware/authentication';
 
-import authRouter from './routes/auth';
-
+import authRouter from './routes/auth.router';
 import notFound from './middleware/not-found';
 import errorHandlerMiddleware from './middleware/error-handler';
 
@@ -36,10 +35,6 @@ app.use(cors());
 
 // Use xssClean to sanitize user input
 app.use(xss());
-
-app.get('/', (req, res) => {
-  res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
-});
 
 //routes
 

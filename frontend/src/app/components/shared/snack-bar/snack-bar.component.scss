@@ -2,54 +2,54 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border-radius: 8px;
-    .example-pizza-party{
+    padding: 0 40px 0 10px;
+    gap: 25px;
+
+    .message{
         p{
             padding: 0 5px 0 5px;
         }
+
     }
+    p.close {
+      position: absolute;
+      top: 5px;
+      right: 6px;
+      margin: 0px;
+      padding: 5px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      border-radius: 1000px;
+      transition: all 0.15s;
+      cursor: pointer;
+
+      &:hover{
+        background-color: #4c4c4c;
+      }
+      &:active{
+        background-color: #3b3b3b;
+      }
+  }
 
 }
-.example-pizza-party{
+.message{
     p{
         margin: 0;
     }
 }
-// .success{
-//     width: 100%;
-//     min-height: 50px;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-evenly;
-//     align-items: center;
-//     background-color: rgb(95, 206, 114);
-//     padding: 10px 5px 10px 5px;
-//     border-radius: 8px;
-// }
-// .failed{
-//     width: 100%;
-//     min-height: 50px;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-evenly;
-//     align-items: center;
-//     background-color: rgb(255, 79, 79);
-//     padding: 10px 5px 10px 5px;
-//     border-radius: 8px;
-// }
-// ::ng-deep .mdc-snackbar__label{
-//     padding: 0!important;
-//     border-radius: 12px;
-// }
-// mat-snack-bar-container :ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface{
-//     padding: 0!important;
-// }
+
+//THESE CSS CLASSES MIGHT BE DIFFERENT DEPENDING ON THE ANGULAR MATERIAL VERSION YOU ARE USING
 ::ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface{
     padding: 0!important;
     border-radius: 12px;
   }
-// ::ng-deep mat-snack-bar-container{
-//     padding: 0!important;
-// }
+::ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface{
+  min-width: max-content;
+  max-width: 100%;
+}

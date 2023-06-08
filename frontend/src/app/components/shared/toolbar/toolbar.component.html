@@ -7,18 +7,23 @@
       <img src="../../../../assets/male-user.png" alt="" height="100px">
     </button>
 
+    <!-- User Profile Menu -->
     <mat-menu #menu="matMenu" class="user-profile-menu d-flex flex-column justify-content-center align-items-center">
       <div class="profile-dropdown-menu d-flex flex-column justify-content-center align-items-center">
         <div class="profile-pic d-flex justify-content-center align-items-center mx-3 mt-3 mb-2">
           <img src="../../../../assets/male-user.png" alt="" height="60px">
         </div>
         <div class="info">
-          <p class="name">Name</p>
-          <p class="email">email@email.com</p>
+          <p class="name">{{getUser().name}}</p>
+          <p class="email">{{getUser().email}}</p>
         </div>
-        <div class="loginLogout">
+        <div class="loginLogout" *ngIf="!getUser().loggedin">
           <button class="global-button-fill loginLogoutButton" routerLink="/login">Login</button>
           <p class="register-link">New user? <a routerLink="/register">Register</a></p>
+        </div>
+        <div class="loginLogout" *ngIf="getUser().loggedin">
+          <button class="global-button-fill loginLogoutButton" (click)="logOut()">Logout</button>
+          <p class="register-link"><a routerLink="/register">Add new account.</a></p>
         </div>
         <div class="edit-profile">
           <button mat-icon-button class="edit-button" aria-label="Example icon-button with menu icon">

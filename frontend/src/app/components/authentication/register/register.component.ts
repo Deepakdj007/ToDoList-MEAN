@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit ,Renderer2} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validator';
-import { RegisterService } from 'src/app/services/register.service';
 import { Subscribable, Subscription } from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   durationInSeconds = 5;
 
 
-  constructor(private _snackBar: MatSnackBar, private fb: FormBuilder, private registerService:RegisterService,private renderer: Renderer2) {}
+  constructor(
+    private _snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private userService:UserService,
+    private router:Router
+    ) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -68,10 +74,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
     else{
       const {name, email, password} = this.registerForm.value;
-      this.registerSubscription = this.registerService.createUser({name:name, email:email, password:password})
+      this.registerSubscription = this.userService.createUser({name:name, email:email, password:password})
       .subscribe((res:any)=>{
         this.openSnackBar(`welcome ${res.user.name}`,"success", '../../../../assets/success.png');
         console.log(res)
+        this.userService.setUser(res.user);
+        this.router.navigate(['/todays-tasks']);
       },
       (err)=>{
       this.openSnackBar(err.error.msg,"failed",'../../../../assets/failed.png')
